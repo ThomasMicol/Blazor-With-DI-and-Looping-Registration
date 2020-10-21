@@ -36,7 +36,7 @@ namespace Blazor_With_DI_and_Looping_Registration
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
 
-            DependencyInjectionRegistration.Register(services);
+            services = DependencyInjectionRegistration.Register(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
