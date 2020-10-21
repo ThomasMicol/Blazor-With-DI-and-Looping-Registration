@@ -1,18 +1,23 @@
 ﻿@page "/fetchdata"
 
 @using Blazor_With_DI_and_Looping_Registration.Data
+@using Data.Data_Set_Models;
+
 @inject WeatherForecastService ForecastService
+@inject InvestorService InvestorService
 
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (forecasts == null)
+@if (loading && investor == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
+    investor = InvestorService.GetInvestor(2).Result;
+    <p>@investor.Name</p>
     <table class="table">
         <thead>
             <tr>
@@ -22,6 +27,7 @@ else
                 <th>Summary</th>
             </tr>
         </thead>
+
         <tbody>
             @foreach (var forecast in forecasts)
             {
@@ -34,13 +40,39 @@ else
             }
         </tbody>
     </table>
+
 }
 
 @code {
     private WeatherForecast[] forecasts;
+    private Investor investor;
+    private bool loading;
 
     protected override async Task OnInitializedAsync()
     {
+        loading = true;
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        var investor = new Investor
+        {
+            Id = 1,
+            Income = 50000M,
+            Name = "David"
+        };
+
+        var investor2 = new Investor
+        {
+            Id = 2,
+            Income = 80000M,
+            Name = "Fiona"
+        };
+
+        InvestorService.CreateInvestor(investor);
+        InvestorService.CreateInvestor(investor2);
+
+
+        investor = await InvestorService.GetInvestor(2);
+
+        loading = false;
     }
+
 }
