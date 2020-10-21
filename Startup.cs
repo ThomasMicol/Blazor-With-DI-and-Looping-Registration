@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Blazor_With_DI_and_Looping_Registration.Data;
+using Microsoft.EntityFrameworkCore.InMemory;
+using Microsoft.EntityFrameworkCore;
+using Blazor_With_DI_and_Looping_Registration.IoC;
 
 namespace Blazor_With_DI_and_Looping_Registration
 {
@@ -26,9 +29,14 @@ namespace Blazor_With_DI_and_Looping_Registration
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<FinanceDbContext>(options =>
+               options.UseInMemoryDatabase("FinanceDb"));
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+
+            DependencyInjectionRegistration.Register(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
