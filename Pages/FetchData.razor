@@ -10,14 +10,12 @@
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (loading && investor == null)
+@if (forecasts == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    investor = InvestorService.GetInvestor(2).Result;
-    <p>@investor.Name</p>
     <table class="table">
         <thead>
             <tr>
@@ -45,34 +43,10 @@ else
 
 @code {
     private WeatherForecast[] forecasts;
-    private Investor investor;
-    private bool loading;
 
     protected override async Task OnInitializedAsync()
     {
-        loading = true;
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
-        var investor = new Investor
-        {
-            Id = 1,
-            Income = 50000M,
-            Name = "David"
-        };
-
-        var investor2 = new Investor
-        {
-            Id = 2,
-            Income = 80000M,
-            Name = "Fiona"
-        };
-
-        InvestorService.CreateInvestor(investor);
-        InvestorService.CreateInvestor(investor2);
-
-
-        investor = await InvestorService.GetInvestor(2);
-
-        loading = false;
     }
 
 }

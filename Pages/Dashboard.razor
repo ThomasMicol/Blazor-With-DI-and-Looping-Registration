@@ -1,0 +1,13 @@
+﻿@inject Blazor_With_DI_and_Looping_Registration.Data.Login.ILoginService LoginService;
+
+<h3>Dashboard</h3>
+@if (LoginService.Investor != null)
+{
+    @LoginService.Investor.Name
+}
+
+
+@code {
+    [Parameter]
+    public Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models.Investor Investor { get; set; }
+}

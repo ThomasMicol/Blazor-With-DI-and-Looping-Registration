@@ -1,7 +1,33 @@
-﻿@page "/"
+﻿@inject Blazor_With_DI_and_Looping_Registration.Data.FinanceDbContext DbContext;
+@inject Blazor_With_DI_and_Looping_Registration.Data.Login.ILoginService LoginService;
 
-<h1>Hello, world!</h1>
+@page "/"
+@using Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models;
+
+@*<h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<SurveyPrompt Title="How is Blazor working for you?" />*@
+
+@if (LoginService.Investor == null)
+{
+    <LoginForm Investor="@Investor"/>
+
+}
+else
+{
+    <Dashboard Investor="@Investor"/>
+}
+
+
+@code{
+    public static Investor Investor { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Blazor_With_DI_and_Looping_Registration.Data.DataGenerator.Init(DbContext);
+
+        base.OnInitialized();
+    }
+}
