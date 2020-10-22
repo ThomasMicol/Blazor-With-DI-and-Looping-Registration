@@ -1,0 +1,46 @@
+﻿@using Blazor_With_DI_and_Looping_Registration.Data.Login;
+
+@inject Blazor_With_DI_and_Looping_Registration.Data.Login.ILoginService LoginService;
+
+<h3>LoginForm</h3>
+@if (LoginService.Investor != null)
+{
+    @LoginService.Investor.Name
+
+}
+else
+{
+    <EditForm Model="@loginForm" OnValidSubmit="@Login">
+        <InputText id="Email" @bind-Value="loginForm.Email" />
+        <InputText id="Password" @bind-Value="loginForm.Password" />
+        <button type="submit">Login</button>
+    </EditForm>
+}
+
+
+@if (InvalidLogin)
+{
+    <p>A user with that email/password was not found</p>
+}
+
+
+@code {
+    private LoginFormModel loginForm = new LoginFormModel();
+    private bool InvalidLogin = false;
+
+    [Parameter]
+    public Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models.Investor Investor { get; set; }
+
+    private void Login()
+    {
+        var inv = LoginService.Login(loginForm.Email, loginForm.Password);
+        if (inv == null)
+        {
+            InvalidLogin = true;
+        }
+        else
+        {
+            Investor = inv;
+        }
+    }
+}
