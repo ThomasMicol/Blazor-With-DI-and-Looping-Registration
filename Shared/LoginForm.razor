@@ -1,8 +1,9 @@
 ﻿@using Blazor_With_DI_and_Looping_Registration.Data.Login;
+@inject Blazor_With_DI_and_Looping_Registration.Data.FinanceDbContext DbContext;
 
 @inject Blazor_With_DI_and_Looping_Registration.Data.Login.ILoginService LoginService;
 
-<h3>LoginForm</h3>
+<h3>Login</h3>
 @if (LoginService.Investor != null)
 {
     @LoginService.Investor.Name
@@ -30,6 +31,13 @@ else
 
     [Parameter]
     public Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models.Investor Investor { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Blazor_With_DI_and_Looping_Registration.Data.DataGenerator.Init(DbContext);
+
+        base.OnInitialized();
+    }
 
     private void Login()
     {
