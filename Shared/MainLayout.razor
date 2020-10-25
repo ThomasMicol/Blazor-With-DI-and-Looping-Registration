@@ -1,8 +1,9 @@
 ﻿@inherits LayoutComponentBase
+@inject Blazor_With_DI_and_Looping_Registration.Data.Login.ILoginService LoginService;
 
-<div class="sidebar">
-    <NavMenu />
-</div>
+    <div class="sidebar">
+        <NavMenu />
+    </div>
 
 <div class="main">
     <div class="top-row px-4">
@@ -10,6 +11,17 @@
     </div>
 
     <div class="content px-4">
-        @Body
+        @if (LoginService.Investor != null)
+        {
+            @Body
+        }
+        else
+        {
+            <LoginForm Investor="LoginService.Investor" />
+        }
     </div>
 </div>
+
+<code>
+
+</code>
