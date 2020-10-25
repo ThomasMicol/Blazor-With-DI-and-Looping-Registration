@@ -15,7 +15,7 @@ namespace Blazor_With_DI_and_Looping_Registration.Data
 
         public FinanceDbContext DbContext { get; }
 
-        public Task<Investor> GetInvestor(long investorId)
+        public Task<Investor> GetInvestor(Guid investorId)
         {
             return Task.FromResult(DbContext.Investors.Where(i => i.Id == investorId).FirstOrDefault());
         }
