@@ -3,7 +3,6 @@
 
 @inject Blazor_With_DI_and_Looping_Registration.Data.Login.ILoginService LoginService;
 
-<h3>Login</h3>
 @if (LoginService.Investor != null)
 {
     @LoginService.Investor.Name
@@ -11,11 +10,34 @@
 }
 else
 {
-    <EditForm Model="@loginForm" OnValidSubmit="@Login">
-        <InputText id="Email" @bind-Value="loginForm.Email" />
-        <InputText id="Password" @bind-Value="loginForm.Password" />
-        <button type="submit">Login</button>
-    </EditForm>
+<form class="o-container o-container--xsmall c-card u-high">
+    <header class="c-card__header">
+        <h2 class="c-heading">
+            Login
+        </h2>
+    </header>
+
+    <div class="c-card__body">
+
+        <EditForm Model="@loginForm" OnValidSubmit="@Login">
+            <label class="c-label">
+                email:
+                <InputText id="Email" @bind-Value="loginForm.Email" class="c-field c-field--label" />
+            </label>
+            <label class="c-label">
+                password: 
+                <InputText id="Password" @bind-Value="loginForm.Password" class="c-field c-field--label" />
+            </label>
+            <footer class="c-card__footer">
+                <button type="submit" class="c-button c-button--brand c-button--block">
+                    Login
+                </button>
+            </footer>
+        </EditForm>
+    </div>
+    
+</form>
+    
 }
 
 
