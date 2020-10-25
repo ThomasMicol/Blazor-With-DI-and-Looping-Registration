@@ -4,16 +4,73 @@
 <h3>Dashboard</h3>
 @if (LoginService.Investor != null)
 {
-    @LoginService.Investor.Name
-    <div class="c-card">
-        @LoginService.Investor.Income.ToCurrency() 
+<div class="o-grid o-grid--wrap o-grid--small-full u-letter-box-medium">
+    <div class="o-grid__cell o-grid__cell--width-50">
+        <div class="u-gradient-text u-gradient-text--success u-xlarge">
+            Income
+        </div>
+        <div class="o-panel-container" style="height: 50px">
+            <div class="o-panel">
+                <ul>
+                    @foreach (var expense in Investor.Income.ToList())
+                    {
+                        <li>
+                            @expense.TransactionAmount.ToCurrency() | @expense.Frequency.ToString()
+                        </li>
+                    }
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <button class="c-button">
+                <span class="oi oi-plus"></span>
+            </button>
+
+        </div>
+
     </div>
+
+    <div class="o-grid__cell o-grid__cell--width-50">
+
+        <div class="u-gradient-text u-gradient-text--error u-xlarge">
+            Expenses
+        </div>
+        <div class="o-panel-container" style="height: 50px">
+            <div class="o-panel">
+                <ul>
+                    @foreach (var expense in Investor.Expenses.ToList())
+                    {
+                        <li>
+                            @expense.TransactionAmount.ToCurrency() | @expense.Frequency.ToString()
+                        </li>
+                    }
+
+                </ul>
+                
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <button class="c-button">
+                <span class="oi oi-minus"></span>
+            </button>
+        </div>
+
+    </div>
+</div>
 }
 
 
 @code {
-    [Parameter]
-    public Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models.Investor Investor { get; set; }
+    public Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models.Investor Investor
+    {
+        get
+        {
+            return LoginService.Investor;
+        }
+    }
 
 
 }
