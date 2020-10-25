@@ -17,6 +17,8 @@ namespace Blazor_With_DI_and_Looping_Registration.Data.Login
 
         public FinanceDbContext DbContext { get; }
 
+
+        
         public Investor Login(string email, string password)
         {
             var investor = DbContext.Investors.Where(i => i.Email == email).FirstOrDefault();
@@ -27,6 +29,7 @@ namespace Blazor_With_DI_and_Looping_Registration.Data.Login
             }
             else
             {
+                // this is not a demo for security. plain text passwords are bad
                 if (investor.Password == password)
                 {
                     Investor = investor;
