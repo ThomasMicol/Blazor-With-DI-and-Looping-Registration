@@ -9,7 +9,7 @@
         <div class="u-gradient-text u-gradient-text--success u-xlarge">
             Income
         </div>
-        <div class="o-panel-container" style="height: 50px">
+        <div class="o-panel-container" style="height: 150px">
             <div class="o-panel">
                 <ul>
                     @foreach (var expense in Investor.Income.ToList())
@@ -24,10 +24,20 @@
 
         </div>
         <div class="card-footer">
-            <button class="c-button">
-                <span class="oi oi-plus"></span>
-            </button>
+            <div class="o-grid">
+                <button class="o-grid__cell o-grid__cell--width-10 c-button">
+                    <span class="oi oi-plus"></span>
+                </button>
+                <blaze-counter class="o-grid__cell u-large u-gradient-text--mono"
+                               auto-start="true"
+                               start-value="0"
+                               end-value="@Investor.Income.Sum(i => i.TransactionAmount)"
+                               duration="2"
+                               decimals="2">
+                    <span slot="prefix">$</span>
 
+                </blaze-counter>
+            </div>
         </div>
 
     </div>
@@ -37,7 +47,7 @@
         <div class="u-gradient-text u-gradient-text--error u-xlarge">
             Expenses
         </div>
-        <div class="o-panel-container" style="height: 50px">
+        <div class="o-panel-container" style="height: 150px">
             <div class="o-panel">
                 <ul>
                     @foreach (var expense in Investor.Expenses.ToList())
@@ -48,16 +58,58 @@
                     }
 
                 </ul>
-                
+
             </div>
 
         </div>
         <div class="card-footer">
-            <button class="c-button">
-                <span class="oi oi-minus"></span>
-            </button>
+            <div class="o-grid">
+                <button class="o-grid__cell--width-10 c-button">
+                    <span class="oi oi-minus"></span>
+
+                </button>
+                <blaze-counter class="o-grid__cell u-large u-gradient-text--mono"
+                               auto-start="true"
+                               start-value="0"
+                               end-value="@Investor.Expenses.Sum(i => i.TransactionAmount)"
+                               duration="2"
+                               decimals="2">
+                    <span slot="prefix">$</span>
+                </blaze-counter>
+            </div>
         </div>
 
+    </div>
+
+    <div class="c-card">
+            <blaze-divider type="dashed"></blaze-divider>
+    </div>
+        <div class="o-grid">
+            <div class="o-grid__cell">
+                <div class="o-grid">
+                    <div class="o-panel-container">
+                        <div class="o-panel">
+                            this is some content
+                        </div>
+                    </div>
+                </div>
+                <div class="o-grid">
+
+                    <div class="o-panel-container">
+                        <div class="o-panel">
+                            this is some content
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="o-grid__cell">
+                <div class="o-panel-container">
+                    <div class="o-panel">
+                        this is some content
+                    </div>
+                </div>
+        </div>
     </div>
 </div>
 }
