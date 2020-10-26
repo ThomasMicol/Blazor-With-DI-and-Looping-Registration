@@ -8,7 +8,7 @@ namespace Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models
     {
         [Required]
         [Key]
-        [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
+        //[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Required]
@@ -18,10 +18,8 @@ namespace Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models
 
         public string Name { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey("Id")]
         public virtual IEnumerable<IncomeTransaction> Income { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey("Id")]
         public virtual IEnumerable<ExpenseTransaction> Expenses { get; set; }
     }
 }

@@ -20,52 +20,62 @@ namespace Blazor_With_DI_and_Looping_Registration.Data
 
             var trans1 = new IncomeTransaction
             {
+                Id = Guid.NewGuid(),
                 TransactionAmount = 50000M,
                 Frequency = TransactionFrequency.Yearly
             };
             var trans2 = new ExpenseTransaction
             {
+                Id = Guid.NewGuid(),
                 TransactionAmount = 100M,
                 Frequency = TransactionFrequency.Weekly
             };
             var trans3 = new IncomeTransaction
             {
+                Id = Guid.NewGuid(),
                 TransactionAmount = 80000M,
                 Frequency = TransactionFrequency.Yearly
             };
             var trans4 = new ExpenseTransaction
             {
+                Id = Guid.NewGuid(),
                 TransactionAmount = 300M,
                 Frequency = TransactionFrequency.Weekly
             };
             var trans5 = new IncomeTransaction
             {
+                Id = Guid.NewGuid(),
                 TransactionAmount = 250000M,
                 Frequency = TransactionFrequency.Yearly
             };
             var trans6 = new ExpenseTransaction
             {
+                Id = Guid.NewGuid(),
                 TransactionAmount = 200M,
                 Frequency = TransactionFrequency.Weekly
             };
             var trans7 = new IncomeTransaction
             {
+                Id = Guid.NewGuid(),
                 TransactionAmount = 201M,
                 Frequency = TransactionFrequency.Weekly
             }; 
             var trans8 = new IncomeTransaction
             {
+                Id = Guid.NewGuid(),
                 TransactionAmount = 210M,
                 Frequency = TransactionFrequency.Weekly
             };
 
             var investor1 = new Investor
             {
+                Id = Guid.NewGuid(),
                 Email = "testEmail1@gmail.com"
                 ,
                 Income = new List<IncomeTransaction>()
                 {
-                    trans1
+                    trans1,
+                    trans7
                 }
                 , Expenses = new List<ExpenseTransaction>()
                 {
@@ -77,6 +87,7 @@ namespace Blazor_With_DI_and_Looping_Registration.Data
 
             var investor2 = new Investor
             {
+                Id = Guid.NewGuid(),
                 Email = "newEmail@gmail.com"
                 ,
                 Income = new List<IncomeTransaction>()
@@ -96,6 +107,7 @@ namespace Blazor_With_DI_and_Looping_Registration.Data
 
             var investor3 = new Investor
             {
+                Id = Guid.NewGuid(),
                 Email = "testingFun@aol.net"
                 ,
                 Income = new List<IncomeTransaction>()

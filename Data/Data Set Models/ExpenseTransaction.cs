@@ -9,7 +9,7 @@ namespace Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models
     public class ExpenseTransaction
     {
         [Key]
-        [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
+        //[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         public virtual Investor Investor { get; set; }
