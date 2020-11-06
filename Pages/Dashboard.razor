@@ -122,9 +122,21 @@
             </h2>
         </blaze-card-header>
         <blaze-card-body>
-            <p class="c-paragraph">
-                Lorem ipsum dolor sit amet, feugiat corpora ex eam. Inciderint eloquentiam sea et.
-            </p>
+            <EditForm Model="@incomeForm" OnValidSubmit="@AddIncome">
+                <label class="c-label">
+                    email:
+                    <InputText id="" @bind-Value="incomeForm.Email" class="c-field c-field--label" />
+                </label>
+                <label class="c-label">
+                    password:
+                    <InputSelect id="Password" @bind-Value="loginForm.Password" class="c-field c-field--label" />
+                </label>
+                <footer class="c-card__footer">
+                    <button type="submit" class="c-button c-button--brand c-button--block">
+                        Login
+                    </button>
+                </footer>
+            </EditForm>
         </blaze-card-body>
         <blaze-card-footer>
             <div class="c-input-group">
@@ -177,6 +189,16 @@
     public void ShowAddExpenseModal(MouseEventArgs args)
     {
         JsRunTime.InvokeVoidAsync("openAddExpenseModalElement");
+    }
+
+    public void AddIncome(MouseEventArgs args)
+    {
+
+    }
+
+    public void AddExpense(MouseEventArgs args)
+    {
+
     }
 
 }
