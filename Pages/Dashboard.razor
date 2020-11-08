@@ -1,6 +1,7 @@
 ﻿@using Blazor_With_DI_and_Looping_Registration.Data.Extensions;
 @inject Blazor_With_DI_and_Looping_Registration.Data.Login.ILoginService LoginService;
 @inject IJSRuntime JsRunTime;
+@inject Blazor_With_DI_and_Looping_Registration.Data.Dashboard.IDashboardService DashboardService;
 
 <h3>Dashboard</h3>
 @if (LoginService.Investor != null)
@@ -29,14 +30,15 @@
                 <button class="o-grid__cell o-grid__cell--width-10 c-button" @onclick="ShowAddIncomeModal">
                     <span class="oi oi-plus"></span>
                 </button>
-                <blaze-counter class="o-grid__cell u-large u-gradient-text--mono"
+                <blaze-counter id="incomeCounter"
+                               class="o-grid__cell u-large u-gradient-text--mono"
                                auto-start="true"
                                start-value="0"
-                               end-value="@Investor.Income.Sum(i => i.TransactionAmount)"
+                               end-value="@Investor.Income.Sum(i => i.ConvertToYearlyStandard().TransactionAmount)"
                                duration="2"
                                decimals="2">
                     <span slot="prefix">$</span>
-
+                    <span slot="suffix"> annually</span>
                 </blaze-counter>
             </div>
         </div>
@@ -69,48 +71,19 @@
                     <span class="oi oi-minus"></span>
 
                 </button>
-                <blaze-counter class="o-grid__cell u-large u-gradient-text--mono"
+                <blaze-counter id="expenseCounter"
+                               class="o-grid__cell u-large u-gradient-text--mono"
                                auto-start="true"
                                start-value="0"
-                               end-value="@Investor.Expenses.Sum(i => i.TransactionAmount)"
+                               end-value="@Investor.Expenses.Sum(i =>  i.ConvertToYearlyStandard().TransactionAmount)"
                                duration="2"
                                decimals="2">
                     <span slot="prefix">$</span>
+                    <span slot="suffix"> annually</span>
                 </blaze-counter>
             </div>
         </div>
 
-    </div>
-
-    <div class="c-card">
-            <blaze-divider type="dashed"></blaze-divider>
-    </div>
-        <div class="o-grid">
-            <div class="o-grid__cell">
-                <div class="o-grid">
-                    <div class="o-panel-container">
-                        <div class="o-panel">
-                            this is some content
-                        </div>
-                    </div>
-                </div>
-                <div class="o-grid">
-
-                    <div class="o-panel-container">
-                        <div class="o-panel">
-                            this is some content
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="o-grid__cell">
-                <div class="o-panel-container">
-                    <div class="o-panel">
-                        this is some content
-                    </div>
-                </div>
-        </div>
     </div>
 </div>
 
@@ -121,29 +94,33 @@
                 Add Income
             </h2>
         </blaze-card-header>
-        <blaze-card-body>
-            <EditForm Model="@incomeForm" OnValidSubmit="@AddIncome">
+        <EditForm Model="@incomeForm" OnValidSubmit="@AddIncome">
+            <blaze-card-body>
+
                 <label class="c-label">
-                    email:
+                    amount:
                     <InputNumber id="Amount" @bind-Value="incomeForm.Amount" class="c-field c-field--label" />
                 </label>
                 <label class="c-label">
-                    password:
-                    <InputSelect id="Frequency" @bind-Value="incomeForm.Frequency" class="c-field c-field--label" />
+                    frequency:
+                    <InputSelect id="Frequency" @bind-Value="incomeForm.Frequency" class="c-field c-field--label">
+                        @foreach (var type in Enum.GetValues(typeof(Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models.TransactionFrequency)).Cast<Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models.TransactionFrequency>())
+                            {
+                            <option value="@type">@type</option>
+                            }
+                    </InputSelect>
                 </label>
-                <footer class="c-card__footer">
+
+
+            </blaze-card-body>
+            <blaze-card-footer>
+                <div class="c-input-group">
                     <button type="submit" class="c-button c-button--brand c-button--block">
-                        Login
+                        Add
                     </button>
-                </footer>
-            </EditForm>
-        </blaze-card-body>
-        <blaze-card-footer>
-            <div class="c-input-group">
-                <button class="c-button c-button--block c-button--brand">Button</button>
-                <button class="c-button c-button--block c-button--info">Button</button>
-            </div>
-        </blaze-card-footer>
+                </div>
+            </blaze-card-footer>
+        </EditForm>
     </blaze-card>
 </blaze-modal>
 
@@ -154,17 +131,30 @@
                 Add Expense
             </h2>
         </blaze-card-header>
-        <blaze-card-body>
-            <p class="c-paragraph">
-                Lorem ipsum dolor sit amet, feugiat corpora ex eam. Inciderint eloquentiam sea et.
-            </p>
+        <EditForm Model="@expenseForm" OnValidSubmit="@AddExpense">
+            <blaze-card-body>
+                <label class="c-label">
+                    amount:
+                    <InputNumber id="Amount" @bind-Value="expenseForm.Amount" class="c-field c-field--label" />
+                </label>
+                <label class="c-label">
+                    frequency:
+                    <InputSelect id="Frequency" @bind-Value="expenseForm.Frequency" class="c-field c-field--label">
+                        @foreach (var type in Enum.GetValues(typeof(Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models.TransactionFrequency)).Cast<Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models.TransactionFrequency>())
+                            {
+                            <option value="@type">@type</option>
+                            }
+                    </InputSelect>
+                </label>
         </blaze-card-body>
         <blaze-card-footer>
             <div class="c-input-group">
-                <button class="c-button c-button--block c-button--brand">Button</button>
-                <button class="c-button c-button--block c-button--info">Button</button>
+                <button type="submit" class="c-button c-button--brand c-button--block">
+                    Add
+                </button>
             </div>
         </blaze-card-footer>
+        </EditForm>
     </blaze-card>
 </blaze-modal>
 }
@@ -196,11 +186,16 @@
 
     public void AddIncome()
     {
-
+        DashboardService.AddIncome(incomeForm);
+        JsRunTime.InvokeVoidAsync("closeAddIncomeModalElement");
+        JsRunTime.InvokeVoidAsync("updateCounter", new List<object> { "#incomeCounter", @Investor.Income.Sum(i => i.ConvertToYearlyStandard().TransactionAmount) });
     }
 
-    public void AddExpense(MouseEventArgs args)
+    public void AddExpense()
     {
+        DashboardService.AddExpense(expenseForm);
+        JsRunTime.InvokeVoidAsync("closeAddExpenseModalElement");
+        JsRunTime.InvokeVoidAsync("updateCounter", new List<object> { "#expenseCounter", @Investor.Expenses.Sum(i => i.ConvertToYearlyStandard().TransactionAmount) });
 
     }
 
