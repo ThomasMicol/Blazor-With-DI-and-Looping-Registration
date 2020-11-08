@@ -5,7 +5,7 @@
 
 @if (LoginService.Investor != null)
 {
-    @LoginService.Investor.Name
+    <Blazor_With_DI_and_Looping_Registration.Pages.Dashboard></Blazor_With_DI_and_Looping_Registration.Pages.Dashboard>
 
 }
 else
@@ -25,7 +25,7 @@ else
                 <InputText id="Email" @bind-Value="loginForm.Email" class="c-field c-field--label" />
             </label>
             <label class="c-label">
-                password: 
+                password:
                 <InputText id="Password" @bind-Value="loginForm.Password" class="c-field c-field--label" />
             </label>
             <footer class="c-card__footer">
@@ -35,7 +35,20 @@ else
             </footer>
         </EditForm>
     </div>
-    
+    <footer style="padding: 1em;">
+        <div style="margin-bottom: 2em;">
+            <p>
+                <span class="font-weight-bold">Important: </span>
+                This is not a demo for security.
+            </p>
+            <p>All passwords are plaintext and all data entered is stored in an in-memory database.</p>
+        </div>
+        <div>
+            <p>Test login</p>
+            <p>email: testEmail1@gmail.com<br />
+            password: davieDaMan123</p>
+        </div>
+    </footer>
 </form>
     
 }
