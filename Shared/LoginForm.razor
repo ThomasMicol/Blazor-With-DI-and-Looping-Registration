@@ -1,11 +1,14 @@
 ﻿@using Blazor_With_DI_and_Looping_Registration.Data.Login;
+@using Blazor_With_DI_and_Looping_Registration.Pages;
+@using Blazor_With_DI_and_Looping_Registration.Data; 
+@using Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models;
 @inject Blazor_With_DI_and_Looping_Registration.Data.FinanceDbContext DbContext;
 
 @inject Blazor_With_DI_and_Looping_Registration.Data.Login.ILoginService LoginService;
 
 @if (LoginService.Investor != null)
 {
-    <Blazor_With_DI_and_Looping_Registration.Pages.Dashboard></Blazor_With_DI_and_Looping_Registration.Pages.Dashboard>
+    <Dashboard></Dashboard>
 
 }
 else
@@ -65,11 +68,11 @@ else
     private bool InvalidLogin = false;
 
     [Parameter]
-    public Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models.Investor Investor { get; set; }
+    public Investor Investor { get; set; }
 
     protected override void OnInitialized()
     {
-        Blazor_With_DI_and_Looping_Registration.Data.DataGenerator.Init(DbContext);
+        DataGenerator.Init(DbContext);
 
         base.OnInitialized();
     }
