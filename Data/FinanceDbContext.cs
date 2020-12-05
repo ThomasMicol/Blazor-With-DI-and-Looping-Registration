@@ -22,9 +22,9 @@ namespace Blazor_With_DI_and_Looping_Registration.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Investor>()
-                .HasMany<IncomeTransaction>(i => i.Income);
+                .HasMany(i => i.Income);
             modelBuilder.Entity<Investor>()
-                .HasMany<ExpenseTransaction>(i => i.Expenses);
+                .HasMany(i => i.Expenses);
 
             base.OnModelCreating(modelBuilder);
         }
