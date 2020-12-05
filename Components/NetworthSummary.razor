@@ -1,0 +1,25 @@
+﻿@using Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models;
+
+<h3>NetworthSummary</h3>
+<div class="o-grid__cell o-grid__cell--width-50">
+    <div class="u-gradient-text u-gradient-text--success u-xlarge">
+        Income
+    </div>
+    <div class="o-panel-container" style="height: 150px">
+        <div class="o-panel">
+            <ul>
+
+            </ul>
+        </div>
+
+    </div>
+    <div class="card-footer">
+        <div class="o-grid">
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Investor Investor { get; set; }
+}
