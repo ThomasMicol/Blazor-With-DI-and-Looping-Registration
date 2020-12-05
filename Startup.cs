@@ -34,7 +34,6 @@ namespace Blazor_With_DI_and_Looping_Registration
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
 
             services = DependencyInjectionRegistration.Register(services);
         }
