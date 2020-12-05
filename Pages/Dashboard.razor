@@ -1,4 +1,6 @@
 ﻿@using Blazor_With_DI_and_Looping_Registration.Data.Extensions;
+@using Blazor_With_DI_and_Looping_Registration.Data.Dashboard.Models;
+@using Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models; 
 @inject Blazor_With_DI_and_Looping_Registration.Data.Login.ILoginService LoginService;
 @inject IJSRuntime JsRunTime;
 @inject Blazor_With_DI_and_Looping_Registration.Data.Dashboard.IDashboardService DashboardService;
@@ -42,8 +44,10 @@
                 </blaze-counter>
             </div>
         </div>
-
     </div>
+
+    <Blazor_With_DI_and_Looping_Registration.Components.NetworthSummary Investor="@Investor"></Blazor_With_DI_and_Looping_Registration.Components.NetworthSummary>
+
 
     <div class="o-grid__cell o-grid__cell--width-50">
 
@@ -84,7 +88,9 @@
             </div>
         </div>
 
+
     </div>
+
 </div>
 
 <blaze-modal small dismissible id="addIncomeModal">
@@ -164,10 +170,10 @@
     [Parameter]
     public int test { get; set; }
 
-    public Blazor_With_DI_and_Looping_Registration.Data.Dashboard.Models.PaymentForm incomeForm = new Data.Dashboard.Models.PaymentForm();
-    public Blazor_With_DI_and_Looping_Registration.Data.Dashboard.Models.PaymentForm expenseForm = new Data.Dashboard.Models.PaymentForm();
+    public PaymentForm incomeForm = new PaymentForm();
+    public PaymentForm expenseForm = new PaymentForm();
 
-    public Blazor_With_DI_and_Looping_Registration.Data.Data_Set_Models.Investor Investor
+    public Investor Investor
     {
         get
         {
